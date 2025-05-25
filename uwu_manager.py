@@ -343,14 +343,6 @@ async def boardpass(interaction: discord.Interaction,
         return
 
     booking = ""
-
-    await interaction.response.defer(ephemeral=True)
-
-    if not is_member(interaction):
-        await interaction.followup.send("You don't have permission to use this command.", ephemeral=True)
-        return
-
-    booking = ""
     try:
         reqst = requests.get(REMOTE_DB_URL + f"/sql/boardpass/s1/{booking_id}")
         if reqst.status_code == 200:
@@ -843,7 +835,7 @@ async def schedule(interaction: discord.Interaction):
     except Exception as e:
         print(e)
     
-    await interaction.response.defer(ephemeral=True)
+    await interaction.response.defer()
     flights = ""
     try:
         reqst = requests.get(REMOTE_DB_URL + f"/sql/schedule/")
